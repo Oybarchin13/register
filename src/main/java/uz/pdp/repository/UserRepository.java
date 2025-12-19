@@ -2,6 +2,7 @@ package uz.pdp.repository;
 
 import uz.pdp.dto.RegisterDTO;
 import uz.pdp.entity.UserEntity;
+import uz.pdp.enums.UserRole;
 
 import java.io.*;
 import java.util.*;
@@ -17,7 +18,7 @@ public class UserRepository {
     }
 
     public void saveUser(RegisterDTO registerDTO){
-        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(),registerDTO.fullName(), registerDTO.phoneNumber(), registerDTO.password(),);
+        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(),registerDTO.fullName(), registerDTO.phoneNumber(), registerDTO.password(), UserRole.USER);
         List<UserEntity> list = getList();
         list.add(userEntity);
         saveList(list);
@@ -67,7 +68,7 @@ public class UserRepository {
         List<UserEntity> list1 = getList();
         if(list1.isEmpty()){
             List<UserEntity> list = new ArrayList<>();
-            list.add(new UserEntity(UUID.randomUUID().toString(), "Vali Valiyev", "901234567","Dog"));
+            list.add(new UserEntity(UUID.randomUUID().toString(), "Vali Valiyev", "901234567","Dog", UserRole.ADMIN));
             saveList(list);
         }
 

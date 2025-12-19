@@ -34,7 +34,7 @@ public class UserController {
         LoginDTO loginDTO = new LoginDTO(phoneNumber, password);
         boolean res = userServices.loginUser(loginDTO);
         if (res) System.out.println("Success");
-        else System.out.println("Aerror");
+        else System.out.println("Error");
 
     }
 
