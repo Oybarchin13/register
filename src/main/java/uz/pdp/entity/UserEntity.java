@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"fullName", "phoneNumber"})
 
 public class UserEntity implements Serializable {
 
