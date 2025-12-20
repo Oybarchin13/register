@@ -8,6 +8,7 @@ import static uz.pdp.util.Utils.*;
 
 public class UserController {
     private final UserServices userServices = UserServices.getInstance();
+    private final MainController mainController = new MainController();
 
 
     public void start(){
@@ -33,7 +34,10 @@ public class UserController {
         String password = getStr("Enter password");
         LoginDTO loginDTO = new LoginDTO(phoneNumber, password);
         boolean res = userServices.loginUser(loginDTO);
-        if (res) System.out.println("Success");
+        if (res) {
+            System.out.println("Success");
+            mainController.mainMenu();
+        }
         else System.out.println("Error");
 
     }

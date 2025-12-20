@@ -15,7 +15,7 @@ public class PostEntity {
     private HomeType type;
     private Address address;
     private double field;
-    private int roomNumber;
+    private int roomCount;
     private long price;
     private PostType postType;
     private String description;
