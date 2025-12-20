@@ -1,8 +1,14 @@
 package uz.pdp.entity;
 
+import lombok.*;
 import uz.pdp.enums.HomeType;
 import uz.pdp.enums.PostType;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = {"id"})
 public class PostEntity {
 
     private String id;
@@ -12,5 +18,6 @@ public class PostEntity {
     private int roomNumber;
     private long price;
     private PostType postType;
+    private String description;
 
 }
