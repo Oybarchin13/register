@@ -3,13 +3,15 @@ package uz.pdp.entity;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
 
-public class Address {
+public class Address implements Serializable {
     private String city;
     private String street;
     private int apermentNumber;
