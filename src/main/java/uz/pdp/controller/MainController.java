@@ -5,10 +5,13 @@ import uz.pdp.dto.PostDTO;
 import uz.pdp.entity.Address;
 import uz.pdp.enums.HomeType;
 import uz.pdp.enums.PostType;
+import uz.pdp.services.PostService;
 
 import static uz.pdp.util.Utils.*;
 
 public class MainController {
+
+    private final PostService postService = PostService.getInstance();
 
 
     public void mainMenu() {
@@ -80,6 +83,8 @@ public class MainController {
         String desc = getStr("Qo'shimcha ma'lumot");
 
         PostDTO postDTO = new PostDTO(homeTypeEnum,addressDTO,field,roomCount,price,postType,desc);
+
+        postService.createPost(postDTO);
 
 
 
