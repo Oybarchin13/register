@@ -7,6 +7,8 @@ import uz.pdp.enums.HomeType;
 import uz.pdp.enums.PostType;
 import uz.pdp.services.PostService;
 
+import java.util.List;
+
 import static uz.pdp.util.Utils.*;
 
 public class MainController {
@@ -27,13 +29,21 @@ public class MainController {
             int menu = getNum("menu tanlang");
             switch (menu){
                 case 1 -> {creatPost();}
-                case 2 -> {}
-                case 3 -> {}
+                case 2 -> {myPosts();}
+                case 3 -> {allPosts();}
                 case 4 -> {}
                 case 0 -> {}
             }
 
         }
+    }
+
+    private void allPosts() {
+
+    }
+
+    private void myPosts() {
+        List<PostDTO> list =  postService.getMyPosts(currentUserId);
     }
 
     private void creatPost() {

@@ -1,11 +1,13 @@
 package uz.pdp.services;
 
+import uz.pdp.dto.AddressDTO;
 import uz.pdp.dto.PostDTO;
 import uz.pdp.entity.Address;
 import uz.pdp.entity.PostEntity;
 import uz.pdp.repository.PostRepository;
 import static uz.pdp.util.Utils.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PostService {
@@ -25,8 +27,20 @@ public class PostService {
     public void createPost(PostDTO postDTO){
         PostEntity entity = toEntity(postDTO);
         postRepository.savePost(entity);
-
     }
+
+
+    public List<PostDTO> getMyPosts(String currentUserId) {
+        List<PostEntity> list = postRepository.getList();
+
+        return postRepository.getList().stream()
+                .filter(entity -> entity.getUserId().equals(currentUserId))
+                .map(entity -> toDTO(entity)).toList();
+    }
+
+
+
+
 
 
     public PostEntity toEntity(PostDTO postDTO){
@@ -35,15 +49,10 @@ public class PostService {
         return postEntity;
     }
 
-
-
-
-
-
-
-
-
-
+    public PostDTO toDTO(PostEntity entity){
+        AddressDTO addressDTO = new AddressDTO(entity.getAddress().getCity(),entity.getAddress().getStreet(), entity.getAddress().getApermentNumber());
+        return new PostDTO(entity.getType(), addressDTO, entity.getField(),entity.getRoomCount(), entity.getPrice(), entity.getPostType(),entity.getDescription());
+    }
 
 
 
