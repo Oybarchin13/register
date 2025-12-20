@@ -1,6 +1,7 @@
 package uz.pdp.services;
 
 import uz.pdp.dto.AddressDTO;
+import uz.pdp.dto.FillterDTO;
 import uz.pdp.dto.PostDTO;
 import uz.pdp.entity.Address;
 import uz.pdp.entity.PostEntity;
@@ -23,7 +24,6 @@ public class PostService {
     }
 
 
-
     public void createPost(PostDTO postDTO){
         PostEntity entity = toEntity(postDTO);
         postRepository.savePost(entity);
@@ -37,12 +37,31 @@ public class PostService {
                 .filter(entity -> entity.getUserId().equals(currentUserId))
                 .map(entity -> toDTO(entity)).toList();
     }
-    public List<PostDTO> getAllPosts(String currentUserId) {
+    public List<PostDTO> getAllPosts() {
         List<PostEntity> list = postRepository.getList();
 
         return postRepository.getList().stream()
                 .map(entity -> toDTO(entity)).toList();
     }
+
+
+    public List<PostDTO> fillter(FillterDTO fillterDTO){
+       return getAllPosts().stream().filter(postDTO -> {
+
+        return (fillterDTO.type() != null && fillterDTO.type().equals(postDTO.type()))
+                || (fillterDTO.address() != null && fillterDTO.address().equals(postDTO.address().city()))
+                || (fillterDTO.price() != 0 && fillterDTO.price() >=  postDTO.price())
+                || (fillterDTO.roomCount() != 0 && fillterDTO.roomCount() >=  postDTO.roomCount());
+
+
+        }).toList();
+    }
+
+
+
+
+
+
 
 
 

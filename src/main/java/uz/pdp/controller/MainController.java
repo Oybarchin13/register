@@ -1,6 +1,7 @@
 package uz.pdp.controller;
 
 import uz.pdp.dto.AddressDTO;
+import uz.pdp.dto.FillterDTO;
 import uz.pdp.dto.PostDTO;
 import uz.pdp.entity.Address;
 import uz.pdp.enums.HomeType;
@@ -32,7 +33,7 @@ public class MainController {
                 case 2 -> {myPosts();}
                 case 3 -> {allPosts();}
                 case 4 -> {search();}
-                case 0 -> {}
+                case 0 -> {return;}
             }
 
         }
@@ -43,15 +44,42 @@ public class MainController {
                 Nima bo'yicha qidirmoqchisiz?
                 1.Home type
                 2.Manzil boyicha
-                3.Maydoni boyicha
+                3.Narxi boyicha
                 4.Xonalar soni boyicha
-                5.Narxi boyicha
+                5.Maydoni boyicha
                 6.Post type
                 7.Hammasi boyicha""");
+
+        int menu = getNum("Tanlang");
+        switch (menu){
+            case 1-> {
+                String homeType = getStr("(KVARTIRA,  HOVLI) kiriting");
+                HomeType homeTypeEnum = HomeType.valueOf(homeType);
+                FillterDTO fillterDTO = new FillterDTO(homeTypeEnum, null, 0,0,0,null);
+                postService.fillter(fillterDTO).forEach(System.out::println);
+            }
+            case 2-> {
+                String address = getStr("(Shaxar nomini kiriting");
+                FillterDTO fillterDTO = new FillterDTO(null, address, 0,0,0,null);
+                postService.fillter(fillterDTO).forEach(System.out::println);
+            }
+            case 3-> {
+                int price = getNum("Narxini  kiriting");
+                FillterDTO fillterDTO = new FillterDTO(null, null, 0,0,price,null);
+                postService.fillter(fillterDTO).forEach(System.out::println);
+            }
+            case 4-> {
+                int roomCount = getNum("Xonalar sonini kiriting");
+                FillterDTO fillterDTO = new FillterDTO(null, null, 0,roomCount,0,null);
+                postService.fillter(fillterDTO).forEach(System.out::println);
+            }
+
+        }
+
     }
 
     private void allPosts() {
-        postService.getAllPosts(currentUserId).forEach(System.out::println);
+        postService.getAllPosts().forEach(System.out::println);
 
 
     }
