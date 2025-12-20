@@ -37,6 +37,12 @@ public class PostService {
                 .filter(entity -> entity.getUserId().equals(currentUserId))
                 .map(entity -> toDTO(entity)).toList();
     }
+    public List<PostDTO> getAllPosts(String currentUserId) {
+        List<PostEntity> list = postRepository.getList();
+
+        return postRepository.getList().stream()
+                .map(entity -> toDTO(entity)).toList();
+    }
 
 
 

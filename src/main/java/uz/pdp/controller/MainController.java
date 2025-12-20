@@ -31,34 +31,47 @@ public class MainController {
                 case 1 -> {creatPost();}
                 case 2 -> {myPosts();}
                 case 3 -> {allPosts();}
-                case 4 -> {}
+                case 4 -> {search();}
                 case 0 -> {}
             }
 
         }
     }
 
+    private void search() {
+        System.out.println("""
+                Nima bo'yicha qidirmoqchisiz?
+                1.Home type
+                2.Manzil boyicha
+                3.Maydoni boyicha
+                4.Xonalar soni boyicha
+                5.Narxi boyicha
+                6.Post type
+                7.Hammasi boyicha""");
+    }
+
     private void allPosts() {
+        postService.getAllPosts(currentUserId).forEach(System.out::println);
+
 
     }
 
     private void myPosts() {
-        List<PostDTO> list =  postService.getMyPosts(currentUserId);
+      postService.getMyPosts(currentUserId).forEach(System.out::println);
+
     }
 
     private void creatPost() {
         System.out.println("""
                 1.Kvartira
-                2.Xonadon
-                3.Hovli
+                2.Hovli
                 """);
         int homeType = getNum("Bittasini tanlang");
 
         HomeType homeTypeEnum;
         switch (homeType){
             case 1 -> homeTypeEnum = HomeType.KVARTIRA;
-            case 2 -> homeTypeEnum = HomeType.XONADON;
-            case 3 -> homeTypeEnum = HomeType.HOVLI;
+            case 2 -> homeTypeEnum = HomeType.HOVLI;
             default -> {
                 System.out.println("Noto‘g‘ri tanlov!");
                 return;
